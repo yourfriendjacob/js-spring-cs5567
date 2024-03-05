@@ -27,7 +27,7 @@ correlation_matrix = df.corr()
 plt.figure(figsize=(30, 12))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Correlation Heatmap')
-plt.show()
+# plt.show()
 
 # Separate the features and target
 X = df[['radius_mean','perimeter_mean','area_mean','concave points_worst','perimeter_worst','radius_worst','concave points_mean']]
@@ -41,13 +41,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 y_train = y_train.to_numpy().reshape(-1,1)
 y_test = y_test.to_numpy().reshape(-1,1)
 
-epocs = 100
-learn_rate = .0003
-batch_size = 20
-val_split = .2
-verbose = 1
+epocs = 1000
+learn_rate = .002
+batch_size = 75
+val_split = .5
+verbose = 0
 
-layer_structure = [X_train.shape[1],2,2,1] #1 input for each feature, 2 neurons hl1, 2 neurons hl2, 1 output
+layer_structure = [X_train.shape[1],3,3,1] #1 input for each feature, 2 neurons hl1, 2 neurons hl2, 1 output
 nn = Neural(layer_structure, epocs, learn_rate, batch_size, val_split, verbose)
 
 nn.fit(X_train, y_train)
